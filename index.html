@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portrait Ai - Transform Your Photo into AI Art</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-login {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-login:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-signup {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-signup:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            background: white;
+            padding: 80px 20px;
+            margin-top: 40px;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.15);
+            background: white;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #667eea;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* STYLES SECTION */
+        .styles {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .styles h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+        }
+
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .style-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .style-card:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .style-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .style-card p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+
+        /* PRICING SECTION */
+        .pricing {
+            padding: 80px 20px;
+            background: white;
+        }
+
+        .pricing h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #333;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .price-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .price-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .price-card .amount {
+            font-size: 48px;
+            color: #667eea;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .price-card .amount sup {
+            font-size: 24px;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .price-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .price-card li:last-child {
+            border-bottom: none;
+        }
+
+        /* CTA SECTION */
+        .cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #222;
+            color: #999;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        footer a {
+            color: #999;
+            text-decoration: none;
+            margin: 0 15px;
+        }
+
+        footer a:hover {
+            color: #667eea;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .features h2, .styles h2, .pricing h2, .cta h2 {
+                font-size: 28px;
+            }
+
+            .nav-buttons {
+                gap: 5px;
+            }
+
+            .btn {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 12px 30px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 15px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .features, .styles, .pricing, .cta {
+                padding: 50px 15px;
+            }
+
+            .features h2, .styles h2, .pricing h2, .cta h2 {
+                font-size: 24px;
+                margin-bottom: 40px;
+            }
+
+            .features-grid, .styles-grid, .pricing-grid {
+                gap: 15px;
+            }
+
+            .feature-card, .style-card, .price-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="logo">✨ Portrait Ai</div>
+        <div class="nav-buttons">
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="login.html" class="btn btn-signup">Sign Up</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <h1>Transform Your Photo into AI Art</h1>
+        <p>Upload a photo and watch it transform into stunning AI-generated portraits. 3D, Cartoon, or Anime — your choice.</p>
+        <div class="hero-buttons">
+            <a href="login.html" class="btn btn-primary">Get Started Free</a>
+            <a href="#styles" class="btn btn-secondary">See Examples</a>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <h2>Why Choose Portrait Ai?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast</h3>
+                <p>Get your AI portrait in seconds. No waiting, no hassle.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Multiple Styles</h3>
+                <p>Choose from 3D, Cartoon, Anime, and more. Express yourself.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Private & Secure</h3>
+                <p>Your photos are encrypted. We never share your data.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Mobile Friendly</h3>
+                <p>Use Portrait Ai anywhere, anytime, on any device.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h3>Save & Download</h3>
+                <p>Keep all your creations in your personal gallery.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Affordable</h3>
+                <p>Get started free. Pay only for what you create.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- STYLES SECTION -->
+    <section class="styles" id="styles">
+        <h2>Available Styles</h2>
+        <div class="styles-grid">
+            <div class="style-card">
+                <h3>🎨 3D Portrait</h3>
+                <p>Realistic and polished. Perfect for professional looks.</p>
+            </div>
+            <div class="style-card">
+                <h3>✏️ 2D Cartoon</h3>
+                <p>Fun and stylized. Great for playful vibes.</p>
+            </div>
+            <div class="style-card">
+                <h3>🎬 Anime</h3>
+                <p>Anime & manga style. For anime lovers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section class="pricing">
+        <h2>Simple Pricing</h2>
+        <div class="pricing-grid">
+            <div class="price-card">
+                <h3>Free</h3>
+                <div class="amount">0<sup>$</sup></div>
+                <ul>
+                    <li>✓ 2-3 Free Generations</li>
+                    <li>✓ All 3 Styles</li>
+                    <li>✓ Download Results</li>
+                    <li>✗ No Account Needed (Initially)</li>
+                </ul>
+                <a href="login.html" class="btn btn-primary">Get Started</a>
+            </div>
+            <div class="price-card">
+                <h3>Pay As You Go</h3>
+                <div class="amount">1<sup>$</sup></div>
+                <ul>
+                    <li>✓ 1 Generation = 1 Credit</li>
+                    <li>✓ Buy Credit Packs</li>
+                    <li>✓ Never Expires</li>
+                    <li>✓ Discounts on Bulk</li>
+                </ul>
+                <a href="login.html" class="btn btn-primary">Buy Credits</a>
+            </div>
+            <div class="price-card">
+                <h3>Monthly</h3>
+                <div class="amount">5<sup>$</sup></div>
+                <ul>
+                    <li>✓ 20 Credits/Month</li>
+                    <li>✓ Priority Support</li>
+                    <li>✓ Save All Creations</li>
+                    <li>✓ Cancel Anytime</li>
+                </ul>
+                <a href="login.html" class="btn btn-primary">Subscribe</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta">
+        <h2>Ready to Create?</h2>
+        <p>Start transforming your photos into stunning AI art right now.</p>
+        <a href="login.html" class="btn btn-primary">Create Your First Portrait</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 Portrait Ai. All rights reserved.</p>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+    </footer>
+</body>
+  </html>
+  
