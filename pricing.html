@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing - Portrait Ai</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+
+        /* HEADER */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* TITLE */
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        /* TOGGLE */
+        .toggle-container {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .toggle-label {
+            color: white;
+            font-weight: 600;
+            margin-right: 15px;
+            display: inline-block;
+        }
+
+        .toggle {
+            display: inline-flex;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 5px;
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: white;
+            color: #667eea;
+            border-radius: 15px;
+        }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .tab-link {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .tab-link.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .tab-link:hover:not(.active) {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* TAB CONTENT */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* PRICING CARDS */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .pricing-card.featured {
+            border: 3px solid #667eea;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #667eea;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .price-card-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .price-amount {
+            font-size: 48px;
+            color: #667eea;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .price-amount sup {
+            font-size: 24px;
+        }
+
+        .price-period {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .features-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .buy-btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .buy-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .buy-btn-secondary {
+            background: #f0f0f0;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .buy-btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        /* PAYMENT FORM */
+        .payment-form {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+            font-size: 28px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            font-weight: 600;
+            color: #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-answer {
+            color: #666;
+            margin-top: 12px;
+            display: none;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .faq-answer.show {
+            display: block;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1);
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .tabs {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .tab-link {
+                width: 100%;
+            }
+
+            .price-amount {
+                font-size: 36px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            h1 {
+                font-size: 24px;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+                margin-bottom: 30px;
+            }
+
+            .pricing-grid {
+                gap: 15px;
+            }
+
+            .pricing-card {
+                padding: 25px 20px;
+            }
+
+            .price-card-title {
+                font-size: 18px;
+            }
+
+            .price-amount {
+                font-size: 32px;
+            }
+
+            .payment-form {
+                padding: 25px 20px;
+            }
+
+            .faq-section {
+                padding: 25px 20px;
+            }
+
+            .faq-section h2 {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <a href="index.html" class="logo">✨ Portrait Ai</a>
+        <nav class="nav-links">
+            <a href="generator.html">Create</a>
+            <a href="dashboard.html">Dashboard</a>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <h1>Simple, Transparent Pricing</h1>
+        <p class="subtitle">Choose the plan that works for you</p>
+
+        <!-- TABS -->
+        <div class="tabs">
+            <button class="tab-link active" onclick="switchTab('credit-packs')">💳 Credit Packs</button>
+            <button class="tab-link" onclick="switchTab('subscriptions')">📅 Subscriptions</button>
+        </div>
+
+        <!-- CREDIT PACKS TAB -->
+        <div id="credit-packs" class="tab-content active">
+            <div class="pricing-grid">
+                <!-- 1 Credit Pack -->
+                <div class="pricing-card">
+                    <h3 class="price-card-title">Starter</h3>
+                    <div class="price-amount">1<sup>$</sup></div>
+                    <div class="price-period">One time</div>
+                    <ul class="features-list">
+                        <li>1 Generation</li>
+                        <li>All 3 Styles</li>
+                        <li>High Quality</li>
+                        <li>Never Expires</li>
+                    </ul>
+                    <button class="buy-btn buy-btn-primary" onclick="buyCredits(1)">Get 1 Credit</button>
+                </div>
+
+                <!-- 5 Credits Pack -->
+                <div class="pricing-card">
+                    <h3 class="price-card-title">Popular</h3>
+                    <div class="price-amount">4<sup>$</sup></div>
+                    <div class="price-period">One time</div>
+                    <ul class="features-list">
+                        <li>5 Generations</li>
+                        <li>All 3 Styles</li>
+                        <li>High Quality</li>
+                        <li>Never Expires</li>
+                        <li>20% Savings</li>
+                    </ul>
+                    <button class="buy-btn buy-btn-primary" onclick="buyCredits(5)">Get 5 Credits</button>
+                </div>
+
+                <!-- 20 Credits Pack -->
+                <div class="pricing-card featured">
+                    <div class="badge">Best Value</div>
+                    <h3 class="price-card-title">Pro</h3>
+                    <div class="price-amount">7<sup>$</sup></div>
+                    <div class="price-period">One time</div>
+                    <ul class="features-list">
+                        <li>20 Generations</li>
+                        <li>All 3 Styles</li>
+                        <li>High Quality</li>
+                        <li>Never Expires</li>
+                        <li>65% Savings</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <button class="buy-btn buy-btn-primary" onclick="buyCredits(20)">Get 20 Credits</button>
+                </div>
+
+                <!-- 50 Credits Pack -->
+                <div class="pricing-card">
+                    <h3 class="price-card-title">Business</h3>
+                    <div class="price-amount">15<sup>$</sup></div>
+                    <div class="price-period">One time</div>
+                    <ul class="features-list">
+                        <li>50 Generations</li>
+                        <li>All 3 Styles</li>
+                        <li>High Quality</li>
+                        <li>Never Expires</li>
+                        <li>70% Savings</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <button class="buy-btn buy-btn-primary" onclick="buyCredits(50)">Get 50 Credits</button>
+                </div>
+
+                <!-- 100 Credits Pack -->
+                <div class="pricing-card">
+                    <h3 class="price-card-title">Enterprise</h3>
+                    <div class="price-amount">25<sup>$</sup></div>
+                    <div class="price-period">One time</div>
+                    <ul class="features-list">
+                        <li>100 Generations</li>
+                        <li>All 3 Styles</li>
+                        <li>High Quality</li>
+                        <li>Never Expires</li>
+                        <li>75% Savings</li>
+                        <li>24/7 Support</li>
+                    </ul>
+                    <button class="buy-btn buy-btn-primary" onclick="buyCredits(100)">Get 100 Credits</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBSCRIPTIONS TAB -->
+        <div id="subscriptions" class="tab-content">
+            <div class="pricing-grid">
+                <!-- Basic Subscription -->
+                <div class="pricing-card">
+                    <h3 class="price-card-title">Basic</h3>
+                    <div class="price-amount">5<sup>$</sup></div>
+                    <div class="price-period">/month</div>
+                    <ul class="features-list">
+                        <li>20 Credits/Month</li>
+                        <li>All 3 Styles</li>
+                        <li>High Quality</li>
+                        <li>Cancel Anytime</li>
+                    </ul>
+                    <button class="buy-btn buy-btn-primary" onclick="subscribe('basic')">Subscribe Now</button>
+                </div>
+
+                <!-- Pro Subscription -->
+                <div class="pricing-card featured">
+                    <div class="badge">Most Popular</div>
+                    <h3 class="price-card-title">Pro</h3>
+                    <div class="price-amount">15<sup>$</sup></div>
+                    <div class="price-period">/month</div>
+                    <ul class="features-list">
+                        <li>100 Credits/Month</li>
+                        <li>All 3 Styles</li>
+                        <li>High Quality</li>
+                        <li>Priority Support</li>
+                        <li>Cancel Anytime</li>
+                    </ul>
+                    <button class="buy-btn buy-btn-primary" onclick="subscribe('pro')">Subscribe Now</button>
+                </div>
+
+                <!-- Unlimited Subscription -->
+                <div class="pricing-card">
+                    <h3 class="price-card-title">Unlimited</h3>
+                    <div class="price-amount">30<sup>$</sup></div>
+                    <div class="price-period">/month</div>
+                    <ul class="features-list">
+                        <li>Unlimited Generations</li>
+                        <li>All 3 Styles</li>
+                        <li>High Quality</li>
+                        <li>24/7 Support</li>
+                        <li>Cancel Anytime</li>
+                    </ul>
+                    <button class="buy-btn buy-btn-primary" onclick="subscribe('unlimited')">Subscribe Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do my credits expire?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    No! Credits from packs never expire. You can use them whenever you want. Subscription credits reset monthly.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Can I upgrade my plan?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes! You can upgrade anytime. If you're on a subscription, we'll prorate the difference.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>How do I get a refund?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We offer a 7-day money-back guarantee on all purchases. Contact support for refund requests.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What payment methods do you accept?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+                    We accept all major credit cards (Visa, Mastercard, American Express) and other card payment methods.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Can I cancel my subscription?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">
+      
