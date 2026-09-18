@@ -15,20 +15,18 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            padding-bottom: 40px;
+            padding: 20px;
         }
 
-        /* HEADER */
         header {
             background: rgba(255, 255, 255, 0.95);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-radius: 12px;
+            margin-bottom: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
         }
 
         .logo {
@@ -38,40 +36,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-decoration: none;
         }
 
-        .user-menu {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .credits {
-            background: #f0f0f0;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            color: #667eea;
-        }
-
-        .menu-btn {
-            background: none;
-            border: none;
-            font-size: 18px;
-            cursor: pointer;
-            color: #667eea;
-        }
-
-        /* MAIN CONTAINER */
         .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 0 20px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        /* TITLE */
         h1 {
             color: white;
             text-align: center;
@@ -79,16 +50,15 @@
             font-size: 28px;
         }
 
-        /* UPLOAD SECTION */
-        .upload-section {
+        .card {
             background: white;
             border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 30px;
+            padding: 30px;
+            margin-bottom: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .upload-section h2 {
+        .card h2 {
             font-size: 20px;
             margin-bottom: 20px;
             color: #333;
@@ -97,22 +67,16 @@
         .upload-area {
             border: 3px dashed #667eea;
             border-radius: 12px;
-            padding: 40px;
+            padding: 40px 20px;
             text-align: center;
-            transition: all 0.3s ease;
             cursor: pointer;
             background: #f8f9ff;
+            transition: all 0.3s ease;
         }
 
-        .upload-area:hover {
-            background: #f0f2ff;
-            border-color: #764ba2;
-        }
-
-        .upload-area.dragover {
+        .upload-area:active {
             background: #e8ebff;
             border-color: #764ba2;
-            transform: scale(1.02);
         }
 
         .upload-icon {
@@ -131,18 +95,17 @@
             font-size: 14px;
         }
 
-        .upload-input {
+        input[type="file"] {
             display: none;
         }
 
-        /* IMAGE PREVIEW */
-        .image-preview {
-            display: none;
+        .preview-section {
             margin-top: 20px;
             text-align: center;
+            display: none;
         }
 
-        .image-preview.show {
+        .preview-section.show {
             display: block;
         }
 
@@ -154,40 +117,21 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        .remove-image-btn {
+        .remove-btn {
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 8px 16px;
+            padding: 10px 20px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 13px;
             font-weight: 600;
-        }
-
-        .remove-image-btn:hover {
-            background: #c0392b;
-        }
-
-        /* STYLE SELECTION */
-        .styles-section {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .styles-section h2 {
-            font-size: 20px;
-            margin-bottom: 25px;
-            color: #333;
         }
 
         .styles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
+            margin-bottom: 20px;
         }
 
         .style-card {
@@ -196,13 +140,14 @@
             padding: 20px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s ease;
             background: white;
+            transition: all 0.3s ease;
         }
 
-        .style-card:hover {
+        .style-card:active {
             border-color: #667eea;
-            transform: translateY(-5px);
+            background: #f8f9ff;
+            transform: scale(0.98);
         }
 
         .style-card.selected {
@@ -222,32 +167,12 @@
             font-size: 14px;
         }
 
-        /* GENERATE SECTION */
-        .generate-section {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
-        }
-
-        .generate-info {
-            background: #f8f9ff;
-            border-left: 4px solid #667eea;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            text-align: left;
-            font-size: 14px;
-            color: #666;
-        }
-
         .generate-btn {
+            width: 100%;
+            padding: 15px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 15px 50px;
             border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
@@ -255,32 +180,26 @@
             transition: all 0.3s ease;
         }
 
-        .generate-btn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
-        }
-
         .generate-btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
 
-        /* LOADING STATE */
-        .loading-container {
-            display: none;
-            text-align: center;
-            padding: 40px;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
+        .generate-btn:active:not(:disabled) {
+            transform: scale(0.98);
         }
 
-        .loading-container.show {
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .loading.show {
             display: block;
         }
 
-        .loader {
+        .spinner {
             border: 5px solid #f0f0f0;
             border-top: 5px solid #667eea;
             border-radius: 50%;
@@ -301,99 +220,7 @@
             margin-bottom: 10px;
         }
 
-        .loading-subtext {
-            color: #999;
-            font-size: 14px;
-        }
-
-        /* RESULT SECTION */
-        .result-section {
-            display: none;
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            margin-bottom: 30px;
-        }
-
-        .result-section.show {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .result-section h2 {
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .result-image {
-            max-width: 100%;
-            max-height: 400px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .result-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            text-decoration: none;
-        }
-
-        .btn-download {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .btn-download:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-share {
-            background: #f0f0f0;
-            color: #667eea;
-        }
-
-        .btn-share:hover {
-            background: #e0e0e0;
-        }
-
-        .btn-generate-more {
-            background: #667eea;
-            color: white;
-        }
-
-        .btn-generate-more:hover {
-            background: #764ba2;
-        }
-
-        /* ERROR MESSAGE */
-        .error-message {
+        .error {
             background: #ffe8e8;
             color: #e74c3c;
             padding: 15px;
@@ -403,124 +230,102 @@
             border-left: 4px solid #e74c3c;
         }
 
-        .error-message.show {
+        .error.show {
             display: block;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .upload-section, .styles-section, .generate-section, .result-section, .loading-container {
-                padding: 25px;
+        .result {
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .result-image {
+            max-width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #667eea;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 20px;
             }
 
             .styles-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            }
-
-            .upload-area {
-                padding: 25px;
-            }
-
-            .upload-icon {
-                font-size: 36px;
-            }
-
-            .result-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
+                gap: 10px;
             }
 
             h1 {
                 font-size: 24px;
             }
         }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 0 15px;
-            }
-
-            .upload-section, .styles-section, .generate-section, .result-section, .loading-container {
-                padding: 20px;
-                margin-bottom: 20px;
-            }
-
-            .styles-section h2, .upload-section h2, .generate-section h2 {
-                font-size: 18px;
-            }
-
-            .styles-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .style-icon {
-                font-size: 24px;
-            }
-
-            .style-name {
-                font-size: 12px;
-            }
-
-            .generate-btn {
-                padding: 12px 30px;
-                font-size: 14px;
-            }
-
-            .result-image {
-                max-height: 300px;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
     <header>
-        <a href="index.html" class="logo">✨ Portrait Ai</a>
-        <div class="user-menu">
-            <div class="credits">
-                <span id="creditsDisplay">3 Credits</span>
-            </div>
-            <a href="dashboard.html" class="menu-btn" title="Dashboard">👤</a>
-        </div>
+        <div class="logo">✨ Portrait Ai</div>
     </header>
 
-    <!-- MAIN CONTAINER -->
     <div class="container">
         <h1>Create Your AI Portrait</h1>
 
-        <!-- ERROR MESSAGE -->
-        <div class="error-message" id="errorMessage"></div>
+        <div class="error" id="errorMsg"></div>
 
-        <!-- UPLOAD SECTION -->
-        <div class="upload-section">
-            <h2>Step 1: Upload Your Photo</h2>
-            <div class="upload-area" id="uploadArea" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" onclick="document.getElementById('photoInput').click()">
+        <!-- UPLOAD -->
+        <div class="card">
+            <h2>📸 Upload Your Photo</h2>
+            <div class="upload-area" onclick="document.getElementById('photoInput').click()">
                 <div class="upload-icon">📸</div>
-                <div class="upload-text">Click to upload or drag & drop</div>
-                <div class="upload-subtext">PNG, JPG, GIF up to 5MB</div>
-                <input type="file" id="photoInput" class="upload-input" accept="image/*" onchange="handleFileSelect(event)">
+                <div class="upload-text">Tap to select photo</div>
+                <div class="upload-subtext">PNG, JPG up to 5MB</div>
             </div>
-
-            <div class="image-preview" id="imagePreview">
-                <img id="previewImage" class="preview-image" src="" alt="Preview">
-                <button class="remove-image-btn" onclick="removeImage()">Remove Image</button>
+            <input type="file" id="photoInput" accept="image/*">
+            
+            <div class="preview-section" id="previewSection">
+                <img id="previewImage" class="preview-image">
+                <button class="remove-btn" onclick="removeImage()">Remove</button>
             </div>
         </div>
 
-        <!-- STYLE SELECTION -->
-        <div class="styles-section">
-            <h2>Step 2: Choose a Style</h2>
+        <!-- STYLES -->
+        <div class="card">
+            <h2>🎨 Choose Style</h2>
             <div class="styles-grid">
                 <div class="style-card" onclick="selectStyle('3d', this)">
                     <div class="style-icon">🎨</div>
-                    <div class="style-name">3D Portrait</div>
+                    <div class="style-name">3D</div>
                 </div>
                 <div class="style-card" onclick="selectStyle('cartoon', this)">
                     <div class="style-icon">✏️</div>
-                    <div class="style-name">2D Cartoon</div>
+                    <div class="style-name">Cartoon</div>
                 </div>
                 <div class="style-card" onclick="selectStyle('anime', this)">
                     <div class="style-icon">🎬</div>
@@ -529,70 +334,41 @@
             </div>
         </div>
 
-        <!-- GENERATE SECTION -->
-        <div class="generate-section">
-            <h2>Step 3: Generate</h2>
-            <div class="generate-info">
-                ℹ️ Each generation uses 1 credit. Free users have 2-3 generations. 
-                <a href="pricing.html" style="color: #667eea; font-weight: 600;">Get more credits</a>
-            </div>
+        <!-- GENERATE -->
+        <div class="card">
             <button class="generate-btn" id="generateBtn" onclick="generatePortrait()" disabled>Generate Portrait</button>
         </div>
 
-        <!-- LOADING STATE -->
-        <div class="loading-container" id="loadingContainer">
-            <div class="loader"></div>
+        <!-- LOADING -->
+        <div class="card loading" id="loading">
+            <div class="spinner"></div>
             <div class="loading-text">Creating your portrait...</div>
-            <div class="loading-subtext">This may take 30-60 seconds</div>
+            <div style="color: #999; font-size: 14px;">This takes 30-60 seconds</div>
         </div>
 
-        <!-- RESULT SECTION -->
-        <div class="result-section" id="resultSection">
+        <!-- RESULT -->
+        <div class="card result" id="result">
             <h2>Your AI Portrait</h2>
-            <img id="resultImage" class="result-image" src="" alt="Generated Portrait">
-            <div class="result-buttons">
-                <button class="btn btn-download" onclick="downloadImage()">⬇️ Download</button>
-                <button class="btn btn-share" onclick="shareImage()">📤 Share</button>
-                <button class="btn btn-generate-more" onclick="generateAnother()">✨ Create Another</button>
+            <img id="resultImage" class="result-image">
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="downloadImage()">⬇️ Download</button>
+                <button class="btn btn-secondary" onclick="generateAnother()">✨ Create Another</button>
             </div>
         </div>
     </div>
 
     <script>
-        // API ENDPOINT
         const API_URL = 'https://portraitai-backend.vercel.app/api/generate';
-
-        // STATE
         let selectedFile = null;
         let selectedStyle = null;
         let currentResult = null;
-        let userCredits = 3;
 
-        // UPLOAD HANDLERS
-        function handleDragOver(e) {
-            e.preventDefault();
-            document.getElementById('uploadArea').classList.add('dragover');
-        }
-
-        function handleDragLeave(e) {
-            document.getElementById('uploadArea').classList.remove('dragover');
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            document.getElementById('uploadArea').classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                handleFileSelect({ target: { files: files } });
-            }
-        }
-
-        function handleFileSelect(e) {
+        // UPLOAD
+        document.getElementById('photoInput').addEventListener('change', function(e) {
             const file = e.target.files[0];
             if (file) {
-                // Validate file
                 if (!file.type.startsWith('image/')) {
-                    showError('Please select a valid image file');
+                    showError('Please select an image file');
                     return;
                 }
                 if (file.size > 5 * 1024 * 1024) {
@@ -602,92 +378,115 @@
 
                 selectedFile = file;
                 const reader = new FileReader();
-                reader.onload = (event) => {
+                reader.onload = function(event) {
                     document.getElementById('previewImage').src = event.target.result;
-                    document.getElementById('imagePreview').classList.add('show');
-                    checkGenerateButton();
+                    document.getElementById('previewSection').classList.add('show');
+                    clearError();
+                    updateButton();
                 };
                 reader.readAsDataURL(file);
-                clearError();
             }
-        }
+        });
 
         function removeImage() {
             selectedFile = null;
-            document.getElementById('imagePreview').classList.remove('show');
             document.getElementById('photoInput').value = '';
-            checkGenerateButton();
+            document.getElementById('previewSection').classList.remove('show');
+            updateButton();
         }
 
-        // STYLE SELECTION
-        function selectStyle(style, element) {
-            document.querySelectorAll('.style-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            element.classList.add('selected');
+        // STYLES
+        function selectStyle(style, el) {
+            document.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
             selectedStyle = style;
-            checkGenerateButton();
+            updateButton();
         }
 
-        // CHECK IF GENERATE BUTTON SHOULD BE ENABLED
-        function checkGenerateButton() {
+        function updateButton() {
             const btn = document.getElementById('generateBtn');
-            if (selectedFile && selectedStyle && userCredits > 0) {
-                btn.disabled = false;
-            } else {
-                btn.disabled = true;
-            }
+            btn.disabled = !(selectedFile && selectedStyle);
         }
 
-        // GENERATE PORTRAIT
+        // GENERATE
         async function generatePortrait() {
-            if (!selectedFile || !selectedStyle) {
-                showError('Please upload a photo and select a style');
-                return;
-            }
+            if (!selectedFile || !selectedStyle) return;
 
-            if (userCredits <= 0) {
-                showError('You don\'t have any credits. Please buy credits to continue.');
-                return;
-            }
-
-            // Show loading
-            document.getElementById('loadingContainer').classList.add('show');
-            document.getElementById('resultSection').classList.remove('show');
+            document.getElementById('loading').classList.add('show');
+            document.getElementById('result').classList.remove('show');
             clearError();
 
             try {
-                // Convert image to base64
                 const reader = new FileReader();
-                reader.onload = async (event) => {
-                    const imageBase64 = event.target.result;
+                reader.onload = async function(e) {
+                    const imageBase64 = e.target.result;
 
-                    // Call API
                     const response = await fetch(API_URL, {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             imageUrl: imageBase64,
-                            style: selectedStyle,
-                        }),
+                            style: selectedStyle
+                        })
                     });
 
                     if (!response.ok) {
                         const error = await response.json();
-                        throw new Error(error.error || 'Failed to generate portrait');
+                        throw new Error(error.error || 'Generation failed');
                     }
 
                     const result = await response.json();
-
                     if (!result.success || !result.image) {
-                        throw new Error('Invalid response from server');
+                        throw new Error('No image returned');
                     }
 
-                    // Deduct credit
-                    userCredits--;
-                    document.getElementById('creditsDisplay').textContent = userCredits + ' Credits';
+                    currentResult = result.image;
+                    document.getElementById('resultImage').src = result.image;
+                    document.getElementById('loading').classList.remove('show');
+                    document.getElementById('result').classList.add('show');
+                };
+                reader.readAsDataURL(selectedFile);
 
-                    // Save result
-                    currentResult = resul
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').classList.remove('show');
+                showError('Error: ' + error.message);
+            }
+        }
+
+        // ACTIONS
+        function downloadImage() {
+            if (!currentResult) return;
+            const link = document.createElement('a');
+            link.href = currentResult;
+            link.download = `portrait-${Date.now()}.png`;
+            link.click();
+        }
+
+        function generateAnother() {
+            selectedFile = null;
+            selectedStyle = null;
+            document.getElementById('photoInput').value = '';
+            document.getElementById('previewSection').classList.remove('show');
+            document.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
+            document.getElementById('result').classList.remove('show');
+            document.getElementById('loading').classList.remove('show');
+            updateButton();
+            window.scrollTo(0, 0);
+        }
+
+        // ERRORS
+        function showError(msg) {
+            const el = document.getElementById('errorMsg');
+            el.textContent = msg;
+            el.classList.add('show');
+        }
+
+        function clearError() {
+            document.getElementById('errorMsg').classList.remove('show');
+        }
+
+        updateButton();
+    </script>
+</body>
+</html>
