@@ -543,7 +543,7 @@
         <div class="loading-container" id="loadingContainer">
             <div class="loader"></div>
             <div class="loading-text">Creating your portrait...</div>
-            <div class="loading-subtext">This may take 10-30 seconds</div>
+            <div class="loading-subtext">This may take 30-60 seconds</div>
         </div>
 
         <!-- RESULT SECTION -->
@@ -559,6 +559,9 @@
     </div>
 
     <script>
+        // API ENDPOINT
+        const API_URL = 'https://portraitai-backend.vercel.app/api/generate';
+
         // STATE
         let selectedFile = null;
         let selectedStyle = null;
@@ -637,7 +640,7 @@
         }
 
         // GENERATE PORTRAIT
-        function generatePortrait() {
+        async function generatePortrait() {
             if (!selectedFile || !selectedStyle) {
                 showError('Please upload a photo and select a style');
                 return;
@@ -653,41 +656,38 @@
             document.getElementById('resultSection').classList.remove('show');
             clearError();
 
-            // Simulate API call (in real app, send to backend)
-            setTimeout(() => {
-                // Deduct credit
-                userCredits--;
-                document.getElementById('creditsDisplay').textContent = userCredits + ' Credits';
+            try {
+                // Convert image to base64
+                const reader = new FileReader();
+                reader.onload = async (event) => {
+                    const imageBase64 = event.target.result;
 
-                // Generate mock result (in real app, use actual generated image)
-                const mockResultUrl = document.getElementById('previewImage').src;
-                currentResult = mockResultUrl;
+                    // Call API
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            imageUrl: imageBase64,
+                            style: selectedStyle,
+                        }),
+                    });
 
-                // Show result
-                document.getElementById('loadingContainer').classList.remove('show');
-                document.getElementById('resultImage').src = mockResultUrl;
-                document.getElementById('resultSection').classList.add('show');
+                    if (!response.ok) {
+                        const error = await response.json();
+                        throw new Error(error.error || 'Failed to generate portrait');
+                    }
 
-                // Save to history (localStorage for now)
-                saveToHistory({
-                    style: selectedStyle,
-                    timestamp: new Date().toLocaleString(),
-                    image: mockResultUrl
-                });
-            }, 2000);
-        }
+                    const result = await response.json();
 
-        // DOWNLOAD IMAGE
-        function downloadImage() {
-            if (!currentResult) return;
-            
-            const link = document.createElement('a');
-            link.href = currentResult;
-            link.download = `portrait-${Date.now()}.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
+                    if (!result.success || !result.image) {
+                        throw new Error('Invalid response from server');
+                    }
 
-        // SHARE IMAGE
-        function share
+                    // Deduct credit
+                    userCredits--;
+                    document.getElementById('creditsDisplay').textContent = userCredits + ' Credits';
+
+                    // Save result
+                    currentResult = resul
